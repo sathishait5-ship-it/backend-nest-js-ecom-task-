@@ -1,0 +1,171 @@
+[
+  {
+    "_id": "6a17e31ae79361813033b11b",
+    "name": "iPhone 15 Pro",
+    "description": "Apple flagship smartphone with A17 Pro chip",
+    "price": 1499,
+    "discountPrice": 1399,
+    "stock": 20,
+    "category": "Mobiles",
+    "brand": "Apple",
+    "images": [
+      "https://example.com/iphone15pro-1.jpg",
+      "https://example.com/iphone15pro-2.jpg"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b117",
+    "createdAt": "2026-05-28T06:39:22.510Z",
+    "updatedAt": "2026-05-28T06:39:22.510Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17e31ae79361813033b11c",
+    "name": "Samsung Galaxy S25",
+    "description": "Premium Android smartphone from Samsung",
+    "price": 1299,
+    "discountPrice": 1199,
+    "stock": 15,
+    "category": "Mobiles",
+    "brand": "Samsung",
+    "images": [
+      "https://example.com/s25-1.jpg"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b118",
+    "createdAt": "2026-05-28T06:39:22.627Z",
+    "updatedAt": "2026-05-28T06:39:22.627Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17e31ae79361813033b11d",
+    "name": "Sony WH-1000XM5",
+    "description": "Noise cancelling wireless headphones",
+    "price": 399,
+    "discountPrice": 349,
+    "stock": 30,
+    "category": "Electronics",
+    "brand": "Sony",
+    "images": [
+      "https://example.com/sony-headphone.jpg"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e31ae79361813033b119",
+    "createdAt": "2026-05-28T06:39:22.745Z",
+    "updatedAt": "2026-05-28T06:39:22.745Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17eb2420883a6c283381ff",
+    "name": "samsung",
+    "description": "samsungmobile",
+    "price": 500,
+    "discountPrice": 499,
+    "stock": 10,
+    "category": "mobiles",
+    "brand": "apple",
+    "images": [
+      "uploads\\productImages\\1779952420104-606007031.png",
+      "uploads\\productImages\\1779952420107-985441627.png"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b117",
+    "createdAt": "2026-05-28T07:13:40.131Z",
+    "updatedAt": "2026-05-28T07:13:40.131Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17ed578fe97eb10c85b23a",
+    "name": "i phone test",
+    "description": "samsungmobile",
+    "price": 500,
+    "discountPrice": 499,
+    "stock": 10,
+    "category": "mobiles",
+    "brand": "apple",
+    "images": [
+      "uploads\\productImages\\1779952983510-542535141.png",
+      "uploads\\productImages\\1779953218300-743637909.png"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b117",
+    "createdAt": "2026-05-28T07:23:03.535Z",
+    "updatedAt": "2026-05-28T07:26:58.349Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17f0e1db216f4fff176de5",
+    "name": "samsung123",
+    "description": "samsungmobile",
+    "price": 500,
+    "discountPrice": 499,
+    "stock": 10,
+    "category": "mobiles",
+    "brand": "apple",
+    "images": [
+      "uploads\\productImages\\1779953889700-653189143.png",
+      "uploads\\productImages\\1779953889703-301701999.png"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b117",
+    "createdAt": "2026-05-28T07:38:09.725Z",
+    "updatedAt": "2026-05-28T07:38:09.725Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17f1e3d29576cfd200d736",
+    "name": "samsung12356",
+    "description": "samsungmobile",
+    "price": 500,
+    "discountPrice": 499,
+    "stock": 10,
+    "category": "mobiles",
+    "brand": "apple",
+    "images": [
+      "uploads\\productImages\\1779954147808-615116260.png",
+      "uploads\\productImages\\1779954147811-573270452.png"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b117",
+    "createdAt": "2026-05-28T07:42:27.841Z",
+    "updatedAt": "2026-05-28T07:42:27.841Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17f2cc99e73eb914ae22db",
+    "name": "samsung123567",
+    "description": "samsungmobile",
+    "price": 500,
+    "discountPrice": 499,
+    "stock": 10,
+    "category": "mobiles",
+    "brand": "apple",
+    "images": [
+      "uploads\\productImages\\1779954380496-77351387.png",
+      "uploads\\productImages\\1779954380501-125074046.png"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b117",
+    "createdAt": "2026-05-28T07:46:20.525Z",
+    "updatedAt": "2026-05-28T07:46:20.525Z",
+    "__v": 0
+  },
+  {
+    "_id": "6a17f60ae85fb1dc956dd599",
+    "name": "samsung1235678",
+    "description": "samsungmobile",
+    "price": 500,
+    "discountPrice": 499,
+    "stock": 10,
+    "category": "mobiles",
+    "brand": "apple",
+    "images": [
+      "uploads\\productImages\\1779955210531-14849390.png",
+      "uploads\\productImages\\1779955210535-821325951.png"
+    ],
+    "isActive": true,
+    "createdBy": "6a17e319e79361813033b117",
+    "createdAt": "2026-05-28T08:00:10.558Z",
+    "updatedAt": "2026-05-28T08:00:10.558Z",
+    "__v": 0
+  }
+]

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Nest App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrapper {
+      width: 100%;
+      table-layout: fixed;
+      background-color: #f4f6f8;
+      padding-bottom: 40px;
+    }
+    .main-table {
+      background-color: #ffffff;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px;
+      border-spacing: 0;
+      font-color: #333333;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    .header {
+      background-color: #e0234e; /* NestJS red brand accent */
+      background-image: linear-gradient(135deg, #e0234e 0%, #a21232 100%);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #ffffff;
+      font-size: 28px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .content {
+      padding: 40px 30px;
+      background-color: #ffffff;
+    }
+    .content h2 {
+      color: #1a1a1a;
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 16px;
+    }
+    .content p {
+      color: #555555;
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0 0 20px 0;
+    }
+    .button-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+    .btn {
+      background-color: #e0234e;
+      color: #ffffff !important;
+      text-decoration: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 6px;
+      display: inline-block;
+      box-shadow: 0 3px 6px rgba(224, 35, 78, 0.2);
+      transition: background-color 0.2s ease;
+    }
+    .footer {
+      background-color: #f8f9fa;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid #eeeeee;
+    }
+    .footer p {
+      color: #888888;
+      font-size: 13px;
+      margin: 0 0 8px 0;
+    }
+    .footer a {
+      color: #e0234e;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <center class="wrapper">
+    <table class="main-table" role="presentation">
+      
+      <!-- HEADER -->
+      <tr>
+        <td class="header">
+          <h1>Welcome To Ait Tech!</h1>
+        </td>
+      </tr>
+
+      <!-- BODY CONTENT -->
+      <tr>
+        <td class="content">
+          <h2>Hi {{name}},</h2>
+          <p>We're absolutely thrilled to have you here. Your account has been successfully created, and you are ready to explore everything our platform has to offer.</p>
+          <p>To get the most out of your experience, we recommend setting up your profile details and exploring your personalized dashboard.</p>
+          
+          <!-- ACTION BUTTON -->
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" class="button-container">
+            <tr>
+              <td align="center" style="border-radius: 6px;">
+                <a href="http://localhost:8080/dashboard" target="_blank" class="btn">Go to Dashboard</a>
+              </td>
+            </tr>
+          </table>
+
+          <p>If you have any questions, feel free to reply directly to this email—our support crew is always happy to help out.</p>
+          <p>Cheers,<br>The Nest App Team</p>
+        </td>
+      </tr>
+
+      <!-- FOOTER -->
+      <tr>
+        <td class="footer">
+          <p>&copy; 2026 Nest App. All rights reserved.</p>
+          <p>You received this email because you registered on our platform. <a href="#">Unsubscribe</a></p>
+        </td>
+      </tr>
+
+    </table>
+  </center>
+</body>
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "name": "iPhone 15 Pro",
+    "description": "Apple flagship smartphone with A17 Pro chip",
+    "price": 1499,
+    "discountPrice": 1399,
+    "stock": 20,
+    "category": "Mobiles",
+    "brand": "Apple",
+    "images": [
+      "https://example.com/iphone15pro-1.jpg",
+      "https://example.com/iphone15pro-2.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+
+  {
+    "name": "Samsung Galaxy S25",
+    "description": "Premium Android smartphone from Samsung",
+    "price": 1299,
+    "discountPrice": 1199,
+    "stock": 15,
+    "category": "Mobiles",
+    "brand": "Samsung",
+    "images": [
+      "https://example.com/s25-1.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "manager@gmail.com"
+  },
+
+  {
+    "name": "Sony WH-1000XM5",
+    "description": "Noise cancelling wireless headphones",
+    "price": 399,
+    "discountPrice": 349,
+    "stock": 30,
+    "category": "Electronics",
+    "brand": "Sony",
+    "images": [
+      "https://example.com/sony-headphone.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "seller@gmail.com"
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "name": "admin",
+    "permissions": [
+      "manage_users",
+      "manage_roles",
+      "create-product",
+      "update-product",
+      "delete-product",
+      "manage_categories",
+      "manage_orders",
+      "manage_payments",
+      "manage_coupons",
+      "manage_settings",
+      "view_reports",
+      "view-users"
+    ]
+  },
+  {
+    "name": "manager",
+    "permissions": [
+      "update-product",
+      "manage_categories",
+      "manage_orders",
+      "view_reports",
+      "view-users"
+    ]
+  },
+  {
+    "name": "seller",
+    "permissions": [
+      "create-product",
+      "manage_own_products",
+      "manage_own_orders",
+      "update-product",
+      "view-users"
+    ]
+  },
+  {
+    "name": "customer",
+    "permissions": [
+      "manage_users"
+    ]
+  }
+]

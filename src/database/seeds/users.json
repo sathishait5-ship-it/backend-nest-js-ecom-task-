@@ -1,0 +1,38 @@
+[
+  {
+    "firstName": "Super",
+    "lastName": "Admin",
+    "email": "admin@gmail.com",
+    "password": "123456",
+    "phone": "9999999999",
+    "address": "India",
+    "role": "admin"
+  },
+  {
+    "firstName": "Store",
+    "lastName": "Manager",
+    "email": "manager@gmail.com",
+    "password": "123456",
+    "phone": "8888888888",
+    "address": "India",
+    "role": "manager"
+  },
+  {
+    "firstName": "Main",
+    "lastName": "Seller",
+    "email": "seller@gmail.com",
+    "password": "123456",
+    "phone": "7777777777",
+    "address": "India",
+    "role": "seller"
+  },
+  {
+    "firstName": "customer",
+    "lastName": "s",
+    "email": "customer@gmail.com",
+    "password": "123456",
+    "phone": "7777777777",
+    "address": "India",
+    "role": "seller"
+  }
+]

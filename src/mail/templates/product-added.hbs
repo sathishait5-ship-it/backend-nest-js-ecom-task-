@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Product Added Notification</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      width: 100%;
+      background-color: #f8f9fa;
+      padding-bottom: 40px;
+    }
+    .main-table {
+      background-color: #ffffff;
+      margin: 20px auto 0 auto;
+      width: 100%;
+      max-width: 600px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-collapse: collapse;
+    }
+    .header {
+      background-color: #2c3e50;
+      padding: 30px 20px;
+      text-align: center;
+      color: #ffffff;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    .content {
+      padding: 30px;
+    }
+    .meta-text {
+      color: #7f8c8d;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .product-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 20px;
+      background-color: #fafbfc;
+    }
+    .product-title {
+      font-size: 20px;
+      color: #2c3e50;
+      margin: 0 0 10px 0;
+      font-weight: 700;
+    }
+    .detail-table {
+      width: 100%;
+      margin-bottom: 20px;
+      border-collapse: collapse;
+    }
+    .detail-table td {
+      padding: 8px 0;
+      font-size: 15px;
+    }
+    .label {
+      color: #7f8c8d;
+      font-weight: 600;
+      width: 30%;
+    }
+    .value {
+      color: #2d3748;
+    }
+    .image-gallery {
+      margin-top: 15px;
+    }
+    .product-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    .footer {
+      background-color: #f1f5f9;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <center class="wrapper">
+    <table class="main-table" role="presentation">
+      
+      <tr>
+        <td class="header">
+          <h1>📦 New Product Cataloged</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="content">
+          <p class="meta-text">Hello Team, a new product has been successfully added by user ID: <strong>{{creatorId}}</strong>.</p>
+          
+          <div class="product-card">
+            <h2 class="product-title">{{name}}</h2>
+            <p style="color: #4a5568; font-size: 14px; margin-top: 0; line-height: 1.5;">{{description}}</p>
+            
+            <table class="detail-table">
+              <tr>
+                <td class="label">Category:</td>
+                <td class="value">{{category}}</td>
+              </tr>
+              {{#if brand}}
+              <tr>
+                <td class="label">Brand:</td>
+                <td class="value">{{brand}}</td>
+              </tr>
+              {{/if}}
+              <tr>
+                <td class="label">Price:</td>
+                <td class="value" style="font-weight: bold; color: #e0234e;">${{price}}</td>
+              </tr>
+              {{#if discountPrice}}
+              <tr>
+                <td class="label">Discount Price:</td>
+                <td class="value" style="color: #2ed573;">${{discountPrice}}</td>
+              </tr>
+              {{/if}}
+              <tr>
+                <td class="label">Stock Level:</td>
+                <td class="value">{{stock}} units</td>
+              </tr>
+            </table>
+
+            {{#if images.length}}
+            <div class="label" style="margin-bottom: 8px;">Product Images:</div>
+            <div class="image-gallery">
+              {{#each images}}
+                <img src="{{this}}" alt="Product image" class="product-img" />
+              {{/each}}
+            </div>
+            {{/if}}
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="footer">
+          <p>This is an automated operational notification triggered by your NestJS Backend.</p>
+        </td>
+      </tr>
+
+    </table>
+  </center>
+</body>
+</html>
