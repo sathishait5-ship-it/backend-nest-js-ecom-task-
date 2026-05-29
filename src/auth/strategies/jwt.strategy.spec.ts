@@ -3,7 +3,10 @@ import { JwtStrategy } from './jwt.strategy';
 import { getModelToken } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
 import { UnauthorizedException } from '@nestjs/common';
-import { mockMongooseModelFactory, mockConfigServiceFactory } from '../../../test/mocks/mongoose-bull.mock';
+import {
+  mockMongooseModelFactory,
+  mockConfigServiceFactory,
+} from '../../../test/mocks/mongoose-bull.mock';
 
 describe('JwtStrategy', () => {
   let strategy: JwtStrategy;
@@ -59,12 +62,12 @@ describe('JwtStrategy', () => {
 
     it('should handle token expiration, clear the session parameters in DB, and throw UnauthorizedException', async () => {
       const pastDate = new Date(Date.now() - 10000); // 10 seconds ago
-      const mockUser = { 
-        _id: 'user_123', 
-        currentToken: 'some_token', 
-        tokenExpiresAt: pastDate 
+      const mockUser = {
+        _id: 'user_123',
+        currentToken: 'some_token',
+        tokenExpiresAt: pastDate,
       };
-      
+
       mockUserModel.findById.mockReturnThis();
       mockUserModel.populate.mockResolvedValue(mockUser);
       mockUserModel.findByIdAndUpdate.mockResolvedValue(null);
@@ -81,11 +84,11 @@ describe('JwtStrategy', () => {
 
     it('should return the populated user document when session is perfectly valid', async () => {
       const futureDate = new Date(Date.now() + 50000);
-      const mockUser = { 
-        _id: 'user_123', 
-        currentToken: 'some_token', 
+      const mockUser = {
+        _id: 'user_123',
+        currentToken: 'some_token',
         tokenExpiresAt: futureDate,
-        role: { name: 'admin', permissions: ['manage_users'] }
+        role: { name: 'admin', permissions: ['manage_users'] },
       };
 
       mockUserModel.findById.mockReturnThis();

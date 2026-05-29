@@ -5,15 +5,19 @@ import { Product } from '../../products/schemas/product.schema';
 import { User } from '../../users/schemas/user.schema';
 
 // Mock raw product seeds data structure
-jest.mock('../seeds/products.json', () => [
-  {
-    name: 'Wireless Mouse',
-    description: 'High precision mouse',
-    price: 25,
-    stock: 100,
-    createdByEmail: 'merchant@test.com',
-  }
-], { virtual: true });
+jest.mock(
+  '../seeds/products.json',
+  () => [
+    {
+      name: 'Wireless Mouse',
+      description: 'High precision mouse',
+      price: 25,
+      stock: 100,
+      createdByEmail: 'merchant@test.com',
+    },
+  ],
+  { virtual: true },
+);
 
 describe('ProductSeeder', () => {
   let seeder: ProductSeeder;
@@ -65,12 +69,17 @@ describe('ProductSeeder', () => {
     it('should establish links using user documents and seed successfully', async () => {
       mockUserModel.find.mockResolvedValue([{ _id: 'user_merchant_77' }]);
       mockProductModel.findOne.mockResolvedValue(null);
-      mockUserModel.findOne.mockResolvedValue({ _id: 'user_merchant_77', email: 'merchant@test.com' });
+      mockUserModel.findOne.mockResolvedValue({
+        _id: 'user_merchant_77',
+        email: 'merchant@test.com',
+      });
       mockProductModel.create.mockResolvedValue({});
 
       await seeder.seed();
 
-      expect(mockUserModel.findOne).toHaveBeenCalledWith({ email: 'merchant@test.com' });
+      expect(mockUserModel.findOne).toHaveBeenCalledWith({
+        email: 'merchant@test.com',
+      });
       expect(mockProductModel.create).toHaveBeenCalledWith(
         expect.objectContaining({
           name: 'Wireless Mouse',

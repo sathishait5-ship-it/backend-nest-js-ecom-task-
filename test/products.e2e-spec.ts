@@ -15,12 +15,14 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
   let mongooseConnection: Connection;
   let adminToken: string;
   let activeProductId: string;
-  
+
   // A clean placeholder category ID string to satisfy class-validator structural rules
   const mockCategoryId = new Types.ObjectId().toString();
 
   const mockMailService = {
-    sendProductAddedMail: jest.fn().mockResolvedValue({ message: 'Dispatched successfully' }),
+    sendProductAddedMail: jest
+      .fn()
+      .mockResolvedValue({ message: 'Dispatched successfully' }),
     sendWelcomeMail: jest.fn().mockResolvedValue({ message: 'Enqueued' }),
   };
 
@@ -36,7 +38,9 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     app.setGlobalPrefix('api');
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(
+      new ValidationPipe({ whitelist: true, transform: true }),
+    );
     await app.init();
 
     mongooseConnection = app.get<Connection>(getConnectionToken());
@@ -49,7 +53,7 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
 
     const fallbackPasswordHash = await bcrypt.hash('admin123', 10);
     const usersCollection = mongooseConnection.collection('users');
-    
+
     await usersCollection.updateOne(
       { email: 'admin@gmail.com' },
       {
@@ -77,9 +81,9 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
       {
         $set: {
           currentToken: adminToken,
-          tokenExpiresAt: tokenExpiry
-        }
-      }
+          tokenExpiresAt: tokenExpiry,
+        },
+      },
     );
   });
 
@@ -121,7 +125,10 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
         .attach('images', Buffer.from('fake_image_1'), 'keyboard-front.png');
 
       expect(response.status).toBe(201);
-      expect(response.body).toHaveProperty('message', 'Product created successfully');
+      expect(response.body).toHaveProperty(
+        'message',
+        'Product created successfully',
+      );
       expect(response.body.data).toHaveProperty('_id');
 
       activeProductId = response.body.data._id;
@@ -157,7 +164,9 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
 
     it('should resolve deep document properties using the aggregate pipelines', async () => {
       if (!activeProductId) {
-        throw new Error('activeProductId is not set — the POST /api/products test must pass first.');
+        throw new Error(
+          'activeProductId is not set — the POST /api/products test must pass first.',
+        );
       }
 
       const response = await request(app.getHttpServer())
@@ -175,7 +184,9 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
   describe('PATCH /api/products/:id', () => {
     it('should selectively modify details, combine file arrays, and maintain data consistency', async () => {
       if (!activeProductId) {
-        throw new Error('activeProductId is not set — the POST /api/products test must pass first.');
+        throw new Error(
+          'activeProductId is not set — the POST /api/products test must pass first.',
+        );
       }
 
       const response = await request(app.getHttpServer())
@@ -185,7 +196,10 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
         .field('stock', '45')
         .expect(200);
 
-      expect(response.body).toHaveProperty('message', 'Product updated successfully');
+      expect(response.body).toHaveProperty(
+        'message',
+        'Product updated successfully',
+      );
     });
   });
 
@@ -195,7 +209,9 @@ describe('Products E-Commerce Engine Flow (e2e)', () => {
   describe('DELETE /api/products/:id', () => {
     it('should purge product records from the database and handle file asset cleanups seamlessly', async () => {
       if (!activeProductId) {
-        throw new Error('activeProductId is not set — the POST /api/products test must pass first.');
+        throw new Error(
+          'activeProductId is not set — the POST /api/products test must pass first.',
+        );
       }
 
       await request(app.getHttpServer())

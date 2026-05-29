@@ -29,7 +29,7 @@ export class CronsService implements OnModuleInit {
   /**
    * CRON Task: Runs every 1 minute to download and save products from MongoDB
    */
-  @Cron(CronExpression.EVERY_30_MINUTES)
+  @Cron(CronExpression.EVERY_YEAR)
   async downloadProductsBackup() {
     this.logger.log(
       'CRON Triggered: Starting scheduled product database download...',

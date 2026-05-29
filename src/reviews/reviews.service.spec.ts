@@ -46,9 +46,9 @@ describe('ReviewsService', () => {
     it('should throw BadRequestException if the provided productId is malformed', async () => {
       const dto = { rating: 5, comment: 'Great!' };
 
-      await expect(service.createReview('invalid-id', dto, mockUser as any)).rejects.toThrow(
-        new BadRequestException('Invalid product ID'),
-      );
+      await expect(
+        service.createReview('invalid-id', dto, mockUser as any),
+      ).rejects.toThrow(new BadRequestException('Invalid product ID'));
     });
 
     it('should throw NotFoundException if the product does not exist in the database', async () => {
@@ -56,19 +56,21 @@ describe('ReviewsService', () => {
       const dto = { rating: 5, comment: 'Great!' };
       mockProductModel.findById.mockResolvedValue(null);
 
-      await expect(service.createReview(validId, dto, mockUser as any)).rejects.toThrow(
-        new NotFoundException('Product not found'),
-      );
+      await expect(
+        service.createReview(validId, dto, mockUser as any),
+      ).rejects.toThrow(new NotFoundException('Product not found'));
     });
 
     it('should throw BadRequestException if the user has already left a review on this product', async () => {
       const validId = new Types.ObjectId().toString();
       const dto = { rating: 5, comment: 'Another comment' };
-      
+
       mockProductModel.findById.mockResolvedValue({ _id: validId });
       mockReviewModel.findOne.mockResolvedValue({ _id: 'existing_review_id' });
 
-      await expect(service.createReview(validId, dto, mockUser as any)).rejects.toThrow(
+      await expect(
+        service.createReview(validId, dto, mockUser as any),
+      ).rejects.toThrow(
         new BadRequestException('You already reviewed this product'),
       );
       expect(mockReviewModel.findOne).toHaveBeenCalledWith({
@@ -80,13 +82,18 @@ describe('ReviewsService', () => {
     it('should successfully link references and save the review document', async () => {
       const validId = new Types.ObjectId().toString();
       const dto = { rating: 4, comment: 'Very good quality' };
-      const createdReviewDoc = { _id: 'rev_999', ...dto, productId: validId, userId: mockUser._id };
+      const createdReviewDoc = {
+        _id: 'rev_999',
+        ...dto,
+        productId: validId,
+        userId: mockUser._id,
+      };
 
       mockProductModel.findById.mockResolvedValue({ _id: validId });
       mockReviewModel.findOne.mockResolvedValue(null);
       mockReviewModel.create.mockResolvedValue(createdReviewDoc);
 
-      const result = await service.createReview(validId, dto, mockUser as any);
+      const result = await service.createReview(validId, dto, mockUser);
 
       expect(mockReviewModel.create).toHaveBeenCalledWith({
         ...dto,

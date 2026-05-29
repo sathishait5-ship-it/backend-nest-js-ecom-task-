@@ -4,10 +4,11 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Role } from '../../roles/schemas/role.schema';
 
 // Mock the raw seed json dataset array
-jest.mock('../seeds/roles.json', () => [
-  { name: 'admin' },
-  { name: 'manager' }
-], { virtual: true });
+jest.mock(
+  '../seeds/roles.json',
+  () => [{ name: 'admin' }, { name: 'manager' }],
+  { virtual: true },
+);
 
 describe('RoleSeeder', () => {
   let seeder: RoleSeeder;

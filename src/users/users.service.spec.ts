@@ -67,9 +67,9 @@ describe('UsersService', () => {
     it('should throw BadRequestException if email already exists', async () => {
       mockUserModel.findOne.mockResolvedValue({ _id: 'existing_id' });
 
-      await expect(service.register(createUserDto, mockMulterFile)).rejects.toThrow(
-        new BadRequestException('Email already exists'),
-      );
+      await expect(
+        service.register(createUserDto, mockMulterFile),
+      ).rejects.toThrow(new BadRequestException('Email already exists'));
     });
 
     it('should successfully register a user with a custom role and fire off a welcome mail', async () => {
@@ -91,7 +91,10 @@ describe('UsersService', () => {
       const result = await service.register(createUserDto, mockMulterFile);
 
       expect(bcrypt.hash).toHaveBeenCalledWith('Password123', 10);
-      expect(mockMailService.sendWelcomeMail).toHaveBeenCalledWith('sathish@test.com', 'Sathish Kumar');
+      expect(mockMailService.sendWelcomeMail).toHaveBeenCalledWith(
+        'sathish@test.com',
+        'Sathish Kumar',
+      );
       expect(result).toHaveProperty('email', 'sathish@test.com');
     });
 
@@ -122,7 +125,12 @@ describe('UsersService', () => {
   describe('getAllUserEssentials', () => {
     it('should run aggregation pipeline mapping and return tailored properties', async () => {
       const mockAggregationResult = [
-        { name: 'Sathish Kumar', email: 'sathish@test.com', roleName: 'customer', permissions: [] },
+        {
+          name: 'Sathish Kumar',
+          email: 'sathish@test.com',
+          roleName: 'customer',
+          permissions: [],
+        },
       ];
       mockUserModel.aggregate.mockResolvedValue(mockAggregationResult);
 
@@ -142,7 +150,10 @@ describe('UsersService', () => {
     });
 
     it('should clear old filesystem imagery links and remove user document from database', async () => {
-      mockUserModel.findById.mockResolvedValue({ _id: 'user_1', image: '/uploads/userImages/old.png' });
+      mockUserModel.findById.mockResolvedValue({
+        _id: 'user_1',
+        image: '/uploads/userImages/old.png',
+      });
       mockUserModel.findByIdAndDelete.mockResolvedValue(null);
 
       const result = await service.deleteUser('user_1');

@@ -28,7 +28,9 @@ describe('Roles Access Management Flow (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     app.setGlobalPrefix('api');
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(
+      new ValidationPipe({ whitelist: true, transform: true }),
+    );
     await app.init();
 
     mongooseConnection = app.get<Connection>(getConnectionToken());
@@ -44,14 +46,14 @@ describe('Roles Access Management Flow (e2e)', () => {
     const usersCollection = mongooseConnection.collection('users');
     await usersCollection.updateOne(
       { email: 'admin@gmail.com' },
-      { 
-        $set: { 
+      {
+        $set: {
           password: fallbackPasswordHash,
           currentToken: null,
           tokenExpiresAt: null,
-          isActive: true
-        } 
-      }
+          isActive: true,
+        },
+      },
     );
 
     // 3. Authenticate to secure a valid Bearer token
@@ -95,7 +97,9 @@ describe('Roles Access Management Flow (e2e)', () => {
 
       expect(response.body).toHaveProperty('_id');
       expect(response.body.name).toBe(payload.name);
-      expect(response.body.permissions).toEqual(expect.arrayContaining(payload.permissions));
+      expect(response.body.permissions).toEqual(
+        expect.arrayContaining(payload.permissions),
+      );
     });
   });
 
@@ -108,8 +112,8 @@ describe('Roles Access Management Flow (e2e)', () => {
 
       expect(Array.isArray(response.body)).toBe(true);
       // Confirms the 4 seeded roles + our 1 newly created role exist
-      expect(response.body.length).toBeGreaterThanOrEqual(5); 
-      
+      expect(response.body.length).toBeGreaterThanOrEqual(5);
+
       const roleNames = response.body.map((role: any) => role.name);
       expect(roleNames).toContain('admin');
       expect(roleNames).toContain('super-moderator');

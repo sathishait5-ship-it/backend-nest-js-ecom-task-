@@ -10,18 +10,26 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     mockUsersService = {
-      register: jest.fn().mockResolvedValue({ _id: 'user_123', message: 'Registered' }),
-      getUsers: jest.fn().mockResolvedValue([{ _id: 'user_123', email: 'test@test.com' }]),
-      getAllUserEssentials: jest.fn().mockResolvedValue([{ name: 'John Doe', email: 'john@test.com' }]),
-      updateUser: jest.fn().mockResolvedValue({ _id: 'user_123', updated: true }),
-      deleteUser: jest.fn().mockResolvedValue({ message: 'User deleted successfully' }),
+      register: jest
+        .fn()
+        .mockResolvedValue({ _id: 'user_123', message: 'Registered' }),
+      getUsers: jest
+        .fn()
+        .mockResolvedValue([{ _id: 'user_123', email: 'test@test.com' }]),
+      getAllUserEssentials: jest
+        .fn()
+        .mockResolvedValue([{ name: 'John Doe', email: 'john@test.com' }]),
+      updateUser: jest
+        .fn()
+        .mockResolvedValue({ _id: 'user_123', updated: true }),
+      deleteUser: jest
+        .fn()
+        .mockResolvedValue({ message: 'User deleted successfully' }),
     };
 
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [
-        { provide: UsersService, useValue: mockUsersService },
-      ],
+      providers: [{ provide: UsersService, useValue: mockUsersService }],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
@@ -31,19 +39,19 @@ describe('UsersController', () => {
     expect(controller).toBeDefined();
   });
 
- describe('register', () => {
+  describe('register', () => {
     it('should invoke service register layer with body variables and file attachment', async () => {
       // Added dummy phone and address properties to satisfy CreateUserDto structural requirements
-      const dto = { 
-        email: 'test@test.com', 
-        password: '123', 
-        firstName: 'A', 
+      const dto = {
+        email: 'test@test.com',
+        password: '123',
+        firstName: 'A',
         lastName: 'B',
         phone: '1234567890',
         address: 'Coimbatore',
       };
-      
-      const result = await controller.register(dto as any, mockFile);
+
+      const result = await controller.register(dto, mockFile);
       expect(mockUsersService.register).toHaveBeenCalledWith(dto, mockFile);
       expect(result).toHaveProperty('message', 'Registered');
     });
@@ -68,8 +76,16 @@ describe('UsersController', () => {
   describe('updateUser', () => {
     it('should pass target id parameters and modification payloads down onto your service tier', async () => {
       const updateDto = { firstName: 'UpdatedName' };
-      const result = await controller.updateUser('user_123', updateDto, mockFile);
-      expect(mockUsersService.updateUser).toHaveBeenCalledWith('user_123', updateDto, mockFile);
+      const result = await controller.updateUser(
+        'user_123',
+        updateDto,
+        mockFile,
+      );
+      expect(mockUsersService.updateUser).toHaveBeenCalledWith(
+        'user_123',
+        updateDto,
+        mockFile,
+      );
       expect(result).toHaveProperty('updated', true);
     });
   });

@@ -31,7 +31,7 @@ describe('Database Seeders Isolation Validation (e2e)', () => {
     // Acquire service engines directly out of the standalone compilation context
     roleSeeder = testingModule.get<RoleSeeder>(RoleSeeder);
     userSeeder = testingModule.get<UserSeeder>(UserSeeder);
-    
+
     mongooseConnection = testingModule.get<Connection>(getConnectionToken());
   });
 
@@ -50,7 +50,7 @@ describe('Database Seeders Isolation Validation (e2e)', () => {
 
       const workingRolesCollection = mongooseConnection.collection('roles');
       const seededRolesCount = await workingRolesCollection.countDocuments();
-      
+
       expect(seededRolesCount).toBeGreaterThan(0);
     });
 

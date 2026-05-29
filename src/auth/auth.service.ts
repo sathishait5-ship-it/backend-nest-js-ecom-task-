@@ -51,42 +51,31 @@ export class AuthService {
       throw new BadRequestException('User account is inactive');
     }
 
-    try {
-      if (user.currentToken && user.tokenExpiresAt) {
-        // Token expired
-        if (user.tokenExpiresAt < new Date()) {
-          await this.userModel.findByIdAndUpdate(user._id, {
-            currentToken: null,
+    if (user.currentToken && user.tokenExpiresAt) {
+      if (user.tokenExpiresAt < new Date()) {
+        await this.userModel.findByIdAndUpdate(user._id, {
+          currentToken: null,
+          tokenExpiresAt: null,
+        });
 
-            tokenExpiresAt: null,
-          });
-
-          throw new UnauthorizedException('Login expired. Please login again');
-        }
-
-        // Already logged in
-        throw new UnauthorizedException(
-          'An active session already exists. Please logout first or wait until the session expires',
-        );
-      }
-    } catch (error) {
-      if (error instanceof UnauthorizedException) {
-        throw error;
+        throw new UnauthorizedException('Login expired. Please login again');
       }
 
-      if (error instanceof BadRequestException) {
-        throw error;
-      }
-
-      throw new UnauthorizedException('Authentication failed');
+      throw new UnauthorizedException(
+        'An active session already exists. Please logout first or wait until the session expires',
+      );
     }
+
+    const role = user.role as unknown as RoleDocument;
 
     const payload = {
       sub: user._id,
-
       email: user.email,
-
-      role: user.role,
+      role: {
+        _id: role._id,
+        name: role.name,
+        permissions: role.permissions,
+      },
     };
 
     const expiresIn = '1d';
@@ -99,15 +88,8 @@ export class AuthService {
 
     await this.userModel.findByIdAndUpdate(user._id, {
       currentToken: accessToken,
-
       tokenExpiresAt,
     });
-
-    const updatedUser = await this.userModel
-      .findById(user._id)
-      .populate('role');
-
-    const populatedRole = updatedUser?.role as unknown as RoleDocument;
 
     return {
       message: 'Login successful',
@@ -117,23 +99,17 @@ export class AuthService {
       tokenExpiresAt,
 
       user: {
-        _id: updatedUser?._id,
+        _id: user._id,
 
-        fullName: `${updatedUser?.firstName ?? ''} ${
-          updatedUser?.lastName ?? ''
-        }`.trim(),
+        fullName: `${user.firstName} ${user.lastName}`,
 
-        image: updatedUser?.image ?? null,
+        image: user.image ?? null,
 
-        ...(populatedRole && populatedRole.name !== 'customer'
-          ? {
-              role: {
-                name: populatedRole.name,
-
-                permissions: populatedRole.permissions ?? [],
-              },
-            }
-          : {}),
+        role: {
+          _id: role._id,
+          name: role.name,
+          permissions: role.permissions ?? [],
+        },
       },
     };
   }

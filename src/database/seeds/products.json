@@ -14,7 +14,6 @@
     "isActive": true,
     "createdByEmail": "admin@gmail.com"
   },
-
   {
     "name": "Samsung Galaxy S25",
     "description": "Premium Android smartphone from Samsung",
@@ -27,9 +26,8 @@
       "https://example.com/s25-1.jpg"
     ],
     "isActive": true,
-    "createdByEmail": "manager@gmail.com"
+    "createdByEmail": "admin@gmail.com"
   },
-
   {
     "name": "Sony WH-1000XM5",
     "description": "Noise cancelling wireless headphones",
@@ -42,6 +40,314 @@
       "https://example.com/sony-headphone.jpg"
     ],
     "isActive": true,
-    "createdByEmail": "seller@gmail.com"
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "MacBook Pro M3",
+    "description": "Apple laptop with M3 chip and Retina display",
+    "price": 2499,
+    "discountPrice": 2299,
+    "stock": 10,
+    "category": "Laptops",
+    "brand": "Apple",
+    "images": [
+      "https://example.com/macbookm3.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Dell XPS 15",
+    "description": "High-performance laptop for professionals",
+    "price": 1899,
+    "discountPrice": 1749,
+    "stock": 12,
+    "category": "Laptops",
+    "brand": "Dell",
+    "images": [
+      "https://example.com/dellxps15.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "HP Pavilion Gaming",
+    "description": "Gaming laptop with RTX graphics",
+    "price": 1399,
+    "discountPrice": 1299,
+    "stock": 18,
+    "category": "Laptops",
+    "brand": "HP",
+    "images": [
+      "https://example.com/hp-pavilion.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "iPad Air",
+    "description": "Lightweight Apple tablet with M2 chip",
+    "price": 899,
+    "discountPrice": 849,
+    "stock": 22,
+    "category": "Tablets",
+    "brand": "Apple",
+    "images": [
+      "https://example.com/ipadair.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Samsung Galaxy Tab S9",
+    "description": "Android tablet with AMOLED display",
+    "price": 799,
+    "discountPrice": 749,
+    "stock": 17,
+    "category": "Tablets",
+    "brand": "Samsung",
+    "images": [
+      "https://example.com/tabs9.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Apple Watch Series 10",
+    "description": "Smartwatch with health tracking features",
+    "price": 599,
+    "discountPrice": 549,
+    "stock": 25,
+    "category": "Wearables",
+    "brand": "Apple",
+    "images": [
+      "https://example.com/applewatch10.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Samsung Galaxy Watch 7",
+    "description": "Advanced smartwatch for Android users",
+    "price": 499,
+    "discountPrice": 449,
+    "stock": 19,
+    "category": "Wearables",
+    "brand": "Samsung",
+    "images": [
+      "https://example.com/galaxywatch7.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Canon EOS R8",
+    "description": "Mirrorless camera for photography enthusiasts",
+    "price": 1599,
+    "discountPrice": 1499,
+    "stock": 8,
+    "category": "Cameras",
+    "brand": "Canon",
+    "images": [
+      "https://example.com/canonr8.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Nikon Z6 II",
+    "description": "Professional full-frame mirrorless camera",
+    "price": 1799,
+    "discountPrice": 1699,
+    "stock": 6,
+    "category": "Cameras",
+    "brand": "Nikon",
+    "images": [
+      "https://example.com/nikonz6.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "JBL Flip 6",
+    "description": "Portable Bluetooth speaker with deep bass",
+    "price": 149,
+    "discountPrice": 129,
+    "stock": 40,
+    "category": "Audio",
+    "brand": "JBL",
+    "images": [
+      "https://example.com/jblflip6.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Bose SoundLink Flex",
+    "description": "Premium portable wireless speaker",
+    "price": 179,
+    "discountPrice": 159,
+    "stock": 28,
+    "category": "Audio",
+    "brand": "Bose",
+    "images": [
+      "https://example.com/boseflex.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Logitech MX Master 3S",
+    "description": "Advanced wireless productivity mouse",
+    "price": 129,
+    "discountPrice": 109,
+    "stock": 35,
+    "category": "Accessories",
+    "brand": "Logitech",
+    "images": [
+      "https://example.com/mxmaster3s.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Keychron K8",
+    "description": "Mechanical wireless keyboard with RGB",
+    "price": 99,
+    "discountPrice": 89,
+    "stock": 50,
+    "category": "Accessories",
+    "brand": "Keychron",
+    "images": [
+      "https://example.com/keychronk8.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Asus ROG Strix G16",
+    "description": "Gaming laptop with Intel i9 and RTX 4080",
+    "price": 2299,
+    "discountPrice": 2149,
+    "stock": 9,
+    "category": "Gaming",
+    "brand": "Asus",
+    "images": [
+      "https://example.com/rogstrixg16.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "PlayStation 5",
+    "description": "Next-generation gaming console from Sony",
+    "price": 599,
+    "discountPrice": 549,
+    "stock": 14,
+    "category": "Gaming",
+    "brand": "Sony",
+    "images": [
+      "https://example.com/ps5.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Xbox Series X",
+    "description": "Powerful gaming console from Microsoft",
+    "price": 599,
+    "discountPrice": 559,
+    "stock": 11,
+    "category": "Gaming",
+    "brand": "Microsoft",
+    "images": [
+      "https://example.com/xboxx.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "OnePlus 13",
+    "description": "Flagship Android phone with fast charging",
+    "price": 999,
+    "discountPrice": 949,
+    "stock": 24,
+    "category": "Mobiles",
+    "brand": "OnePlus",
+    "images": [
+      "https://example.com/oneplus13.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Google Pixel 9 Pro",
+    "description": "Google smartphone with AI camera features",
+    "price": 1199,
+    "discountPrice": 1099,
+    "stock": 13,
+    "category": "Mobiles",
+    "brand": "Google",
+    "images": [
+      "https://example.com/pixel9pro.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Realme GT 7",
+    "description": "Affordable flagship smartphone with AMOLED display",
+    "price": 699,
+    "discountPrice": 649,
+    "stock": 32,
+    "category": "Mobiles",
+    "brand": "Realme",
+    "images": [
+      "https://example.com/realmegt7.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Nothing Phone 3",
+    "description": "Unique transparent design smartphone",
+    "price": 799,
+    "discountPrice": 749,
+    "stock": 16,
+    "category": "Mobiles",
+    "brand": "Nothing",
+    "images": [
+      "https://example.com/nothingphone3.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Lenovo Legion 5",
+    "description": "Gaming laptop with AMD Ryzen processor",
+    "price": 1499,
+    "discountPrice": 1399,
+    "stock": 10,
+    "category": "Gaming",
+    "brand": "Lenovo",
+    "images": [
+      "https://example.com/legion5.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
+  },
+  {
+    "name": "Mi Smart TV 55",
+    "description": "4K Ultra HD smart television",
+    "price": 799,
+    "discountPrice": 699,
+    "stock": 21,
+    "category": "Televisions",
+    "brand": "Xiaomi",
+    "images": [
+      "https://example.com/mi55tv.jpg"
+    ],
+    "isActive": true,
+    "createdByEmail": "admin@gmail.com"
   }
 ]

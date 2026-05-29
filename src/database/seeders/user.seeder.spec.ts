@@ -6,15 +6,19 @@ import { Role } from '../../roles/schemas/role.schema';
 import * as bcrypt from 'bcrypt';
 
 // 1. Mock raw users json source file parameters
-jest.mock('../seeds/users.json', () => [
-  {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john@test.com',
-    password: 'securePassword123',
-    role: 'admin',
-  }
-], { virtual: true });
+jest.mock(
+  '../seeds/users.json',
+  () => [
+    {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john@test.com',
+      password: 'securePassword123',
+      role: 'admin',
+    },
+  ],
+  { virtual: true },
+);
 
 // 2. Mock bcrypt at the module boundary to bypass C++ binding immutability
 jest.mock('bcrypt', () => ({
@@ -69,18 +73,21 @@ describe('UserSeeder', () => {
 
     it('should encrypt passwords and resolve mappings successfully', async () => {
       const mockRoleId = 'role_admin_555';
-      
+
       // Setup successful query responses so code paths flow all the way to create()
       mockRoleModel.find.mockResolvedValue([{ _id: mockRoleId }]);
       mockUserModel.findOne.mockResolvedValue(null);
-      mockRoleModel.findOne.mockResolvedValue({ _id: mockRoleId, name: 'admin' });
+      mockRoleModel.findOne.mockResolvedValue({
+        _id: mockRoleId,
+        name: 'admin',
+      });
       mockUserModel.create.mockResolvedValue({});
 
       await seeder.seed();
 
       // Verify bcrypt mock was hit cleanly
       expect(bcrypt.hash).toHaveBeenCalledWith('securePassword123', 10);
-      
+
       // Verify database payload mapped fields correctly
       expect(mockUserModel.create).toHaveBeenCalledWith(
         expect.objectContaining({

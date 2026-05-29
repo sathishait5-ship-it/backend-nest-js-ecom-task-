@@ -22,34 +22,38 @@ describe('Authentication & User Flow (e2e)', () => {
 
   // Completely neutralizes live Redis/Bull/SMTP mail processing loops
   const mockMailService = {
-    sendWelcomeMail: jest.fn().mockResolvedValue({ message: 'Welcome mail enqueued' }),
-    sendProductAddedMail: jest.fn().mockResolvedValue({ message: 'Notification enqueued' }),
+    sendWelcomeMail: jest
+      .fn()
+      .mockResolvedValue({ message: 'Welcome mail enqueued' }),
+    sendProductAddedMail: jest
+      .fn()
+      .mockResolvedValue({ message: 'Notification enqueued' }),
   };
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
-      .overrideProvider(MailService) 
-      .useValue(mockMailService)     
+      .overrideProvider(MailService)
+      .useValue(mockMailService)
       .compile();
 
     app = moduleFixture.createNestApplication();
-    
+
     app.setGlobalPrefix('api');
     app.useGlobalPipes(
-      new ValidationPipe({ 
-        whitelist: true, 
+      new ValidationPipe({
+        whitelist: true,
         transform: true,
-        forbidNonWhitelisted: true 
-      })
+        forbidNonWhitelisted: true,
+      }),
     );
-    
+
     await app.init();
     mongooseConnection = app.get<Connection>(getConnectionToken());
 
     const roleSeeder = moduleFixture.get<RoleSeeder>(RoleSeeder);
-    await roleSeeder.seed(); 
+    await roleSeeder.seed();
   });
 
   afterAll(async () => {

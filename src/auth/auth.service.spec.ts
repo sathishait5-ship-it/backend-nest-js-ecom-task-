@@ -38,7 +38,7 @@ describe('AuthService', () => {
     }).compile();
 
     service = module.get<AuthService>(AuthService);
-    
+
     // Clear mock histories between every test block run
     jest.clearAllMocks();
   });
@@ -63,7 +63,7 @@ describe('AuthService', () => {
       const mockUser = { email: 'user@test.com', password: 'hashedPassword' };
       mockUserModel.findOne.mockReturnThis();
       mockUserModel.populate.mockResolvedValue(mockUser);
-      
+
       // Control mock return value using our module mock reference
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
@@ -73,7 +73,11 @@ describe('AuthService', () => {
     });
 
     it('should throw BadRequestException if user account is inactive', async () => {
-      const mockUser = { email: 'user@test.com', password: 'hashedPassword', isActive: false };
+      const mockUser = {
+        email: 'user@test.com',
+        password: 'hashedPassword',
+        isActive: false,
+      };
       mockUserModel.findOne.mockReturnThis();
       mockUserModel.populate.mockResolvedValue(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(true);
@@ -117,7 +121,7 @@ describe('AuthService', () => {
       mockUserModel.findOne.mockReturnThis();
       mockUserModel.populate.mockResolvedValueOnce(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(true);
-      
+
       mockUserModel.findByIdAndUpdate.mockResolvedValue(null);
       mockUserModel.findById.mockReturnThis();
       mockUserModel.populate.mockResolvedValueOnce(mockUser);
@@ -127,7 +131,10 @@ describe('AuthService', () => {
       expect(result).toHaveProperty('message', 'Login successful');
       expect(result).toHaveProperty('token', 'mock_access_token');
       expect(result.user.fullName).toBe('John Doe');
-      expect(mockUserModel.findByIdAndUpdate).toHaveBeenCalledWith('user_id_123', expect.any(Object));
+      expect(mockUserModel.findByIdAndUpdate).toHaveBeenCalledWith(
+        'user_id_123',
+        expect.any(Object),
+      );
     });
   });
 
@@ -137,10 +144,13 @@ describe('AuthService', () => {
 
       const result = await service.logout('user_id_123');
 
-      expect(mockUserModel.findByIdAndUpdate).toHaveBeenCalledWith('user_id_123', {
-        currentToken: null,
-        tokenExpiresAt: null,
-      });
+      expect(mockUserModel.findByIdAndUpdate).toHaveBeenCalledWith(
+        'user_id_123',
+        {
+          currentToken: null,
+          tokenExpiresAt: null,
+        },
+      );
       expect(result).toEqual({ message: 'Logout successful' });
     });
   });

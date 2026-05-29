@@ -18,20 +18,23 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
 
     // Static Images Folder
-    app.use('/uploads', express.static(join(__dirname, '..', 'uploads')));
+    app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
 
     // Enable CORS
-    app.enableCors();
-
+    app.enableCors({
+      origin: 'http://localhost:3000',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true, // Allow cookies and auth headers to pass through
+    });
     // Global Validation
     app.useGlobalPipes(
       new ValidationPipe({
         whitelist: true,
         transform: true,
         forbidNonWhitelisted: true,
-         transformOptions: {
-      enableImplicitConversion: true,
-    },
+        transformOptions: {
+          enableImplicitConversion: true,
+        },
       }),
     );
 

@@ -56,7 +56,10 @@ describe('MailService', () => {
         createdBy: new Types.ObjectId(),
       };
 
-      const result = await service.sendProductAddedMail(['admin@test.com'], mockProduct as any);
+      const result = await service.sendProductAddedMail(
+        ['admin@test.com'],
+        mockProduct as any,
+      );
 
       expect(mockQueue.add).toHaveBeenCalledWith(
         'product_added_job',
@@ -64,12 +67,17 @@ describe('MailService', () => {
           recipients: ['admin@test.com'],
           templateContext: expect.objectContaining({
             name: 'Shoes',
-            images: ['http://localhost:8080/uploads/img1.png', 'http://localhost:8080/uploads/img2.png'],
+            images: [
+              'http://localhost:8080/uploads/img1.png',
+              'http://localhost:8080/uploads/img2.png',
+            ],
           }),
         }),
         { attempts: 3, backoff: 10000, removeOnComplete: true },
       );
-      expect(result.message).toBe('Product notification emails enqueued successfully.');
+      expect(result.message).toBe(
+        'Product notification emails enqueued successfully.',
+      );
     });
   });
 });

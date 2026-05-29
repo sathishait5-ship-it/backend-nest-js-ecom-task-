@@ -9,8 +9,15 @@ describe('RolesController', () => {
 
   beforeEach(async () => {
     mockRolesService = {
-      createRole: jest.fn().mockResolvedValue({ _id: 'new_role_id', name: 'editor', permissions: [] }),
-      getRoles: jest.fn().mockResolvedValue([{ _id: '1', name: 'admin' }, { _id: '2', name: 'customer' }]),
+      createRole: jest.fn().mockResolvedValue({
+        _id: 'new_role_id',
+        name: 'editor',
+        permissions: [],
+      }),
+      getRoles: jest.fn().mockResolvedValue([
+        { _id: '1', name: 'admin' },
+        { _id: '2', name: 'customer' },
+      ]),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -35,7 +42,7 @@ describe('RolesController', () => {
       const bodyDto: CreateRoleDto = {
         name: 'editor',
         permissions: ['write-posts'],
-      } as any; // Cast as any if DTO defines extra property checks
+      }; // Cast as any if DTO defines extra property checks
 
       const result = await controller.createRole(bodyDto);
 

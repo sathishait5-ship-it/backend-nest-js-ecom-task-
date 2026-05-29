@@ -8,7 +8,9 @@ describe('MailController', () => {
 
   beforeEach(async () => {
     mockMailService = {
-      sendWelcomeMail: jest.fn().mockResolvedValue({ message: 'Welcome mail enqueued successfully' }),
+      sendWelcomeMail: jest
+        .fn()
+        .mockResolvedValue({ message: 'Welcome mail enqueued successfully' }),
     };
 
     const module: TestingModule = await Test.createTestingModule({
@@ -27,7 +29,10 @@ describe('MailController', () => {
     it('should forward query parameters down to the service', async () => {
       const result = await controller.sendWelcome('alice@test.com', 'Alice');
 
-      expect(mockMailService.sendWelcomeMail).toHaveBeenCalledWith('alice@test.com', 'Alice');
+      expect(mockMailService.sendWelcomeMail).toHaveBeenCalledWith(
+        'alice@test.com',
+        'Alice',
+      );
       expect(result.message).toBe('Welcome mail enqueued successfully');
     });
   });

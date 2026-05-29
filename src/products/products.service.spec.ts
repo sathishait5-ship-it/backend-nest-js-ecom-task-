@@ -74,31 +74,43 @@ describe('ProductsService', () => {
   });
 
   describe('createProduct', () => {
-    const mockUser = { 
-      _id: new Types.ObjectId().toString(), 
+    const mockUser = {
+      _id: new Types.ObjectId().toString(),
       email: 'admin@test.com',
-      role: { _id: 'r1', name: 'admin', permissions: [] }
+      role: { _id: 'r1', name: 'admin', permissions: [] },
     };
     const mockFiles = [{ path: 'uploads/p1.png' }] as Express.Multer.File[];
 
     it('should throw BadRequestException if discountPrice exceeds original price', async () => {
       const dto = { name: 'Phone', price: 100, discountPrice: 150, stock: 10 };
 
-      await expect(service.createProduct(dto as any, mockFiles, mockUser as any)).rejects.toThrow(
-        new BadRequestException('Discount price cannot be greater than original price'),
+      await expect(
+        service.createProduct(dto as any, mockFiles, mockUser as any),
+      ).rejects.toThrow(
+        new BadRequestException(
+          'Discount price cannot be greater than original price',
+        ),
       );
     });
 
     it('should successfully save product and dispatch alert emails to admin/managers', async () => {
       const dto = { name: 'Phone', price: 100, discountPrice: 80, stock: 10 };
-      const createdDoc = { _id: 'prod_123', ...dto, images: ['uploads/p1.png'] };
+      const createdDoc = {
+        _id: 'prod_123',
+        ...dto,
+        images: ['uploads/p1.png'],
+      };
 
       mockProductModel.create.mockResolvedValue(createdDoc);
       mockUserModel.lean.mockResolvedValue([
         { email: 'mgr@test.com', role: { name: 'manager' } },
       ]);
 
-      const result = await service.createProduct(dto as any, mockFiles, mockUser as any);
+      const result = await service.createProduct(
+        dto as any,
+        mockFiles,
+        mockUser,
+      );
 
       expect(mockProductModel.create).toHaveBeenCalled();
       expect(mockMailService.sendProductAddedMail).toHaveBeenCalled();
@@ -109,11 +121,11 @@ describe('ProductsService', () => {
   describe('getAllProducts', () => {
     it('should calculate pagination and apply query filters properly', async () => {
       const queryDto = { page: 1, limit: 5, search: 'laptop', inStock: 'true' };
-      
+
       mockProductModel.lean.mockResolvedValue([{ name: 'Gaming Laptop' }]);
       mockProductModel.countDocuments.mockResolvedValue(1);
 
-      const result = await service.getAllProducts(queryDto as any);
+      const result = await service.getAllProducts(queryDto);
 
       expect(mockProductModel.find).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -144,7 +156,9 @@ describe('ProductsService', () => {
 
     it('should return aggregated data matrix if found', async () => {
       const validId = new Types.ObjectId().toString();
-      const mockAggResult = [{ _id: validId, name: 'Tablet', averageRating: 4.5 }];
+      const mockAggResult = [
+        { _id: validId, name: 'Tablet', averageRating: 4.5 },
+      ];
       mockProductModel.aggregate.mockResolvedValue(mockAggResult);
 
       const result = await service.getProductById(validId);
@@ -155,7 +169,10 @@ describe('ProductsService', () => {
   describe('deleteProduct', () => {
     it('should sweep related reviews and call findByIdAndDelete', async () => {
       const validId = new Types.ObjectId().toString();
-      mockProductModel.findById.mockResolvedValue({ _id: validId, images: ['path/img.png'] });
+      mockProductModel.findById.mockResolvedValue({
+        _id: validId,
+        images: ['path/img.png'],
+      });
       mockReviewModel.deleteMany.mockResolvedValue({});
       mockProductModel.findByIdAndDelete.mockResolvedValue({});
 
@@ -165,7 +182,9 @@ describe('ProductsService', () => {
       expect(fs.unlinkSync).toHaveBeenCalled();
       expect(mockReviewModel.deleteMany).toHaveBeenCalled();
       expect(mockProductModel.findByIdAndDelete).toHaveBeenCalledWith(validId);
-      expect(result.message).toBe('Product and related reviews deleted successfully');
+      expect(result.message).toBe(
+        'Product and related reviews deleted successfully',
+      );
     });
   });
 });

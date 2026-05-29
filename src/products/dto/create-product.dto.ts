@@ -19,11 +19,9 @@ export class CreateProductDto {
   @IsNotEmpty()
   description!: string;
 
-
   @Type(() => Number)
   @IsNumber()
   price!: number;
-
 
   @Type(() => Number)
   @IsNumber()

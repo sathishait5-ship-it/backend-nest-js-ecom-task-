@@ -29,7 +29,9 @@ describe('Users Administration Flow (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     app.setGlobalPrefix('api');
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
+    app.useGlobalPipes(
+      new ValidationPipe({ whitelist: true, transform: true }),
+    );
     await app.init();
 
     mongooseConnection = app.get<Connection>(getConnectionToken());
@@ -43,17 +45,17 @@ describe('Users Administration Flow (e2e)', () => {
     // 2. Override the seeded Admin password to ensure it matches our login payload
     const fallbackPasswordHash = await bcrypt.hash('admin123', 10);
     const usersCollection = mongooseConnection.collection('users');
-    
+
     await usersCollection.updateOne(
       { email: 'admin@gmail.com' },
-      { 
-        $set: { 
+      {
+        $set: {
           password: fallbackPasswordHash,
-          currentToken: null,       // Clear session locks
+          currentToken: null, // Clear session locks
           tokenExpiresAt: null,
-          isActive: true
-        } 
-      }
+          isActive: true,
+        },
+      },
     );
 
     // 3. Login with the verified credentials to obtain an active token
@@ -65,8 +67,11 @@ describe('Users Administration Flow (e2e)', () => {
       });
 
     adminToken = loginResponse.body.token;
-    
-    console.log('🔑 TEST SESSION TOKEN STATUS:', adminToken ? 'VERIFIED GREEN' : 'MISSING');
+
+    console.log(
+      '🔑 TEST SESSION TOKEN STATUS:',
+      adminToken ? 'VERIFIED GREEN' : 'MISSING',
+    );
   });
 
   afterAll(async () => {
@@ -90,8 +95,10 @@ describe('Users Administration Flow (e2e)', () => {
 
       expect(Array.isArray(response.body)).toBe(true);
       expect(response.body.length).toBeGreaterThan(0);
-      
-      const regularUser = response.body.find((u: any) => u.email !== 'admin@gmail.com');
+
+      const regularUser = response.body.find(
+        (u: any) => u.email !== 'admin@gmail.com',
+      );
       targetUserId = regularUser ? regularUser._id : response.body[0]._id;
     });
   });
@@ -105,7 +112,7 @@ describe('Users Administration Flow (e2e)', () => {
 
       expect(Array.isArray(response.body)).toBe(true);
       expect(response.body.length).toBeGreaterThan(0);
-      
+
       const userRecord = response.body[0];
       expect(userRecord).toHaveProperty('name');
       expect(userRecord).toHaveProperty('email');

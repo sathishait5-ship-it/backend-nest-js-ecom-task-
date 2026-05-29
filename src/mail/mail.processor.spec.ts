@@ -45,7 +45,9 @@ describe('MailProcessor', () => {
       const mockJob: any = { data: { to: 'bad@test.com', name: 'Test' } };
       mockMailerService.sendMail.mockRejectedValue(new Error('SMTP down'));
 
-      await expect(processor.handleWelcomeMail(mockJob)).rejects.toThrow('SMTP down');
+      await expect(processor.handleWelcomeMail(mockJob)).rejects.toThrow(
+        'SMTP down',
+      );
     });
   });
 

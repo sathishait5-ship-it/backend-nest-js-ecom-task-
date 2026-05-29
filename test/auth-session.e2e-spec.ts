@@ -33,8 +33,10 @@ describe('Auth Session Lock Constraints (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     app.setGlobalPrefix('api');
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
-    
+    app.useGlobalPipes(
+      new ValidationPipe({ whitelist: true, transform: true }),
+    );
+
     await app.init();
     mongooseConnection = app.get<Connection>(getConnectionToken());
 
@@ -80,7 +82,9 @@ describe('Auth Session Lock Constraints (e2e)', () => {
         .send({ email: testUser.email, password: testUser.password })
         .expect(401); // Asserts your custom 'active session already exists' throw
 
-      expect(response.body.message).toContain('An active session already exists');
+      expect(response.body.message).toContain(
+        'An active session already exists',
+      );
     });
 
     it('should free the lock upon successful logout', async () => {

@@ -32,7 +32,10 @@ describe('RolesService', () => {
   describe('createRole', () => {
     it('should invoke model creation with specified name and permission options', async () => {
       const inputData = { name: 'manager', permissions: ['view-items'] };
-      mockRoleModel.create.mockResolvedValue({ _id: 'role_id_111', ...inputData });
+      mockRoleModel.create.mockResolvedValue({
+        _id: 'role_id_111',
+        ...inputData,
+      });
 
       const result = await service.createRole(inputData);
 
@@ -77,15 +80,23 @@ describe('RolesService', () => {
     });
   });
 
-describe('updateRole', () => {
+  describe('updateRole', () => {
     it('should apply modification properties onto your documents and specify new returning context configuration option flags', async () => {
       const updateData = { permissions: ['read-only'] };
-      mockRoleModel.findByIdAndUpdate.mockResolvedValue({ _id: 'id_1', name: 'user', ...updateData });
+      mockRoleModel.findByIdAndUpdate.mockResolvedValue({
+        _id: 'id_1',
+        name: 'user',
+        ...updateData,
+      });
 
       const result = await service.updateRole('id_1', updateData);
 
-      expect(mockRoleModel.findByIdAndUpdate).toHaveBeenCalledWith('id_1', updateData, { new: true });
-      
+      expect(mockRoleModel.findByIdAndUpdate).toHaveBeenCalledWith(
+        'id_1',
+        updateData,
+        { new: true },
+      );
+
       // Fixed with non-null assertion (!) to clear ts(18047)
       expect(result!.permissions).toContain('read-only');
     });
@@ -93,11 +104,15 @@ describe('updateRole', () => {
 
   describe('deleteRole', () => {
     it('should clear specific items by referencing targets with findByIdAndDelete operations', async () => {
-      mockRoleModel.findByIdAndDelete.mockResolvedValue({ _id: 'id_to_remove' });
+      mockRoleModel.findByIdAndDelete.mockResolvedValue({
+        _id: 'id_to_remove',
+      });
 
       const result = await service.deleteRole('id_to_remove');
 
-      expect(mockRoleModel.findByIdAndDelete).toHaveBeenCalledWith('id_to_remove');
+      expect(mockRoleModel.findByIdAndDelete).toHaveBeenCalledWith(
+        'id_to_remove',
+      );
       expect(result).toBeDefined();
     });
   });

@@ -52,7 +52,9 @@ describe('CronsService', () => {
       service.onModuleInit();
 
       expect(fs.existsSync).toHaveBeenCalled();
-      expect(fs.mkdirSync).toHaveBeenCalledWith(expect.any(String), { recursive: true });
+      expect(fs.mkdirSync).toHaveBeenCalledWith(expect.any(String), {
+        recursive: true,
+      });
     });
 
     it('should skip directory creation if the backup directory already exists', () => {
@@ -93,7 +95,9 @@ describe('CronsService', () => {
     });
 
     it('should gracefully handle and log errors if database fetch fails', async () => {
-      mockProductModel.lean.mockRejectedValue(new Error('Database disconnected'));
+      mockProductModel.lean.mockRejectedValue(
+        new Error('Database disconnected'),
+      );
 
       // Should not throw exception upwards because it is trapped inside a try/catch block
       await expect(service.downloadProductsBackup()).resolves.not.toThrow();

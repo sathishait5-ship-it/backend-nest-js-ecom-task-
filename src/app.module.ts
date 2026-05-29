@@ -17,7 +17,7 @@ import { ProductsModule } from './products/products.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { SeederModule } from './database/seeders/seed.module';
 import { CronsModule } from './crons/crons.module';
-
+import { DashboardModule } from './dashboard/dashboard.module';
 // MIDDLEWARE
 import { CorsMiddleware } from './common/middleware/cors.middleware';
 
@@ -80,6 +80,7 @@ const logger = new Logger('MongoDB');
     ReviewsModule,
     SeederModule,
     CronsModule,
+    DashboardModule,
   ],
 
   controllers: [AppController],

@@ -9,7 +9,7 @@ export class RolesService {
   constructor(
     @InjectModel(Role.name)
     private readonly roleModel: Model<RoleDocument>,
-  ) { }
+  ) {}
 
   // Create Role
   async createRole(data: { name: string; permissions: string[] }) {
