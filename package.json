@@ -11,20 +11,20 @@
     "start": "nest start",
     "start:dev": "cross-env NODE_ENV=development nest start --watch",
     "start:staging": "cross-env NODE_ENV=staging nest start",
-    "start:prod": "cross-env NODE_ENV=production node dist/main",
+    "start:prod": "cross-env NODE_ENV=production node dist/src/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest",
+    "test:watch": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest --watch",
+    "test:cov": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest --coverage",
+    "test:debug": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest --config ./test/jest-e2e.json",
     "seed": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/database/seeders/seed.ts",
     "seed:roles": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/database/seeders/role.seed.ts",
     "seed:users": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/database/seeders/user.seed.ts",
     "seed:products": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/database/seeders/product.seed.ts"
   },
   "dependencies": {
-    "@nestjs-modules/mailer": "^1.10.3",
+    "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/bull": "^11.0.4",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.4",
@@ -69,7 +69,7 @@
     "@types/cron": "^2.0.1",
     "@types/express": "^5.0.0",
     "@types/handlebars": "^4.0.40",
-    "@types/jest": "^30.0.0",
+    "@types/jest": "^29.5.14",
     "@types/multer": "^2.1.0",
     "@types/node": "^22.10.7",
     "@types/nodemailer": "^8.0.0",
@@ -80,7 +80,9 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^16.0.0",
-    "jest": "^30.4.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.4.1",
+    "jest-environment-node": "^29.7.0",
     "prettier": "^3.8.3",
     "source-map-support": "^0.5.21",
     "supertest": "^7.2.2",
@@ -90,22 +92,5 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.20.0"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
   }
 }

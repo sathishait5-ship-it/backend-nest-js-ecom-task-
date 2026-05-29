@@ -16,8 +16,4 @@ export class RolesController {
   async getRoles() {
     return this.rolesService.getRoles();
   }
-  @Post('seed')
-  async seedRoles() {
-    return this.rolesService.seedRoles();
-  }
 }
