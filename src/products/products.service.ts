@@ -82,7 +82,7 @@ export class ProductsService {
     /**
      * 2. Extract image paths
      */
-    const imagePaths = files.map((file) => file.path);
+    const imagePaths = files?.map((file) => file.path) || [];
 
     /**
      * 3. Create and save product document to MongoDB

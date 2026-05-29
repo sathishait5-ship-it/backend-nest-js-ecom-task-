@@ -19,21 +19,20 @@ export class CreateProductDto {
   @IsNotEmpty()
   description!: string;
 
+
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
   price!: number;
 
-  @Type(() => Number)
-  @IsNumber()
-  @Min(0)
-  @IsOptional()
-  discountPrice?: number;
 
   @Type(() => Number)
   @IsNumber()
-  @Min(0)
   stock!: number;
+
+  @IsOptional()
+  @Type(() => Number)
+  @IsNumber()
+  discountPrice?: number;
 
   @IsString()
   @IsNotEmpty()

@@ -17,7 +17,7 @@
     "test:watch": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest --watch",
     "test:cov": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest --coverage",
     "test:debug": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest --config ./test/jest-e2e.json",
+    "test:e2e": "cross-env NODE_OPTIONS=\"--no-experimental-webstorage\" jest --config ./test/jest-e2e.json --runInBand",
     "seed": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/database/seeders/seed.ts",
     "seed:roles": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/database/seeders/role.seed.ts",
     "seed:users": "cross-env NODE_ENV=development ts-node -r tsconfig-paths/register src/database/seeders/user.seed.ts",
