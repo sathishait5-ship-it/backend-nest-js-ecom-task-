@@ -3,6 +3,18 @@
 /node_modules
 /build
 
+# uploads
+uploads/
+
+# backups
+backups/
+
+# build
+dist/
+
+# env
+.env
+
 # Logs
 logs
 *.log
