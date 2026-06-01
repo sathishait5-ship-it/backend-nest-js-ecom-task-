@@ -9,7 +9,7 @@ export class DashboardController {
   constructor(private readonly dashboardService: DashboardService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Get('status')
+  @Get('stats')
   async getDashboardStats() {
     return this.dashboardService.getDashboardStats();
   }

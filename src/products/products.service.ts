@@ -361,12 +361,14 @@ export class ProductsService {
     }
 
     const product = await this.productModel.findById(id);
+
     if (!product) {
       throw new NotFoundException('Product not found');
     }
 
-    const finalPrice: number = updateProductDto.price ?? product.price;
-    const finalDiscountPrice: number | undefined =
+    const finalPrice = updateProductDto.price ?? product.price;
+
+    const finalDiscountPrice =
       updateProductDto.discountPrice ?? product.discountPrice;
 
     if (finalDiscountPrice && finalDiscountPrice > finalPrice) {
@@ -375,36 +377,86 @@ export class ProductsService {
       );
     }
 
-    let updatedImages = [...product.images];
-    const removedImages = Array.isArray(updateProductDto.removedImages)
-      ? updateProductDto.removedImages
-      : updateProductDto.removedImages
-        ? [updateProductDto.removedImages]
-        : [];
+    let existingImages: string[] = product.images;
+    let removedImages: string[] = [];
 
-    if (removedImages.length > 0) {
-      for (const imagePath of removedImages) {
-        if (fs.existsSync(imagePath)) {
-          fs.unlinkSync(imagePath);
+    try {
+      if (updateProductDto.existingImages) {
+        const parsed: unknown = JSON.parse(updateProductDto.existingImages);
+
+        if (Array.isArray(parsed)) {
+          existingImages = parsed.filter(
+            (item): item is string => typeof item === 'string',
+          );
         }
       }
+
+      if (updateProductDto.removedImages) {
+        const parsed: unknown = JSON.parse(updateProductDto.removedImages);
+
+        if (Array.isArray(parsed)) {
+          removedImages = parsed.filter(
+            (item): item is string => typeof item === 'string',
+          );
+        }
+      }
+    } catch {
+      throw new BadRequestException('Invalid image data format');
+    }
+
+    /**
+     * Start with images currently kept by frontend
+     */
+    let updatedImages = [...existingImages];
+
+    /**
+     * Remove deleted images
+     */
+    if (removedImages.length > 0) {
+      for (const imagePath of removedImages) {
+        try {
+          if (fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
+          }
+        } catch (error) {
+          console.error(`Failed to delete image: ${imagePath}`, error);
+        }
+      }
+
       updatedImages = updatedImages.filter(
         (image) => !removedImages.includes(image),
       );
     }
 
-    if (files?.length > 0) {
+    /**
+     * Append newly uploaded images
+     */
+    if (files?.length) {
       const newImages = files.map((file) => file.path);
-      updatedImages = [...updatedImages, ...newImages];
+
+      updatedImages.push(...newImages);
     }
+
+    /**
+     * Remove temporary request-only fields
+     */
+    const updateData = {
+      ...updateProductDto,
+    };
+
+    delete updateData.existingImages;
+    delete updateData.removedImages;
 
     const updatedProduct = await this.productModel.findByIdAndUpdate(
       id,
       {
-        ...updateProductDto,
+        ...updateData,
         images: updatedImages,
       },
-      { new: true },
+      {
+        new: true,
+        runValidators: true,
+      },
     );
 
     return {

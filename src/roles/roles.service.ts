@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -11,29 +15,64 @@ export class RolesService {
     private readonly roleModel: Model<RoleDocument>,
   ) {}
 
-  // Create Role
   async createRole(data: { name: string; permissions: string[] }) {
+    const exists = await this.roleModel.findOne({
+      name: data.name,
+    });
+
+    if (exists) {
+      throw new BadRequestException('Role already exists');
+    }
+
     const role = await this.roleModel.create(data);
 
-    return role;
+    return {
+      success: true,
+      message: 'Role created successfully',
+      data: role,
+    };
   }
 
-  // Get All Roles
   async getRoles() {
-    return await this.roleModel.find();
+    const roles = await this.roleModel.find();
+
+    return {
+      success: true,
+      message: 'Roles fetched successfully',
+      data: roles,
+    };
   }
 
-  // Get Role By ID
   async getRoleById(roleId: string) {
-    return await this.roleModel.findById(roleId);
+    const role = await this.roleModel.findById(roleId);
+
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
+
+    return {
+      success: true,
+      message: 'Role fetched successfully',
+      data: role,
+    };
   }
 
-  // Get Role By Name
   async getRoleByName(name: string) {
-    return await this.roleModel.findOne({ name });
+    const role = await this.roleModel.findOne({
+      name,
+    });
+
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
+
+    return {
+      success: true,
+      message: 'Role fetched successfully',
+      data: role,
+    };
   }
 
-  // Update Role
   async updateRole(
     roleId: string,
     updateData: {
@@ -41,13 +80,32 @@ export class RolesService {
       permissions?: string[];
     },
   ) {
-    return await this.roleModel.findByIdAndUpdate(roleId, updateData, {
+    const role = await this.roleModel.findByIdAndUpdate(roleId, updateData, {
       new: true,
     });
+
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
+
+    return {
+      success: true,
+      message: 'Role updated successfully',
+      data: role,
+    };
   }
 
-  // Delete Role
   async deleteRole(roleId: string) {
-    return await this.roleModel.findByIdAndDelete(roleId);
+    const role = await this.roleModel.findByIdAndDelete(roleId);
+
+    if (!role) {
+      throw new NotFoundException('Role not found');
+    }
+
+    return {
+      success: true,
+      message: 'Role deleted successfully',
+      data: null,
+    };
   }
 }

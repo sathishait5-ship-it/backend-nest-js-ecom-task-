@@ -6,11 +6,29 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: ['eslint.config.mjs'],
+    ignores: [
+      'eslint.config.mjs',
+
+      // Jest test files
+      '**/*.test.ts',
+      '**/*.test.tsx',
+      '**/*.spec.ts',
+      '**/*.spec.tsx',
+
+      // Test folders
+      '**/__tests__/**',
+      'test/**',
+      'tests/**',
+
+      // Optional Cypress
+      'cypress/**',
+    ],
   },
+
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   eslintPluginPrettierRecommended,
+
   {
     languageOptions: {
       globals: {
@@ -24,6 +42,7 @@ export default tseslint.config(
       },
     },
   },
+
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
